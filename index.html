@@ -1,0 +1,568 @@
+<div id="app">
+  <div>
+    <form
+      method="post"
+      name="wf-form-website-homepage"
+      data-name="website-homepage"
+      id="lead-form"
+      data-form="multi-step"
+      class="form"
+      v-if="!success"
+      @submit.prevent="sendForm()"
+      aria-label="website-homepage"
+    >
+      <div data-form="step" class="form-step" v-if="step == 0">
+        <label for="lead-input" class="input_title">Nome completo*</label>
+
+        <input
+          type="text"
+          class="input_field w-input"
+          :class="{ 'error': $v.form.name.$error }"
+          v-model="$v.form.name.$model"
+          :class="status($v.form.name)"
+          maxlength="256"
+          name="Nome"
+          data-name="Nome"
+          placeholder="Insira seu nome completo"
+          required=""
+        />
+
+        <label for="Email-7" class="input_title">E-mail*</label
+        ><input
+          type="email"
+          class="input_field w-input"
+          :class="{ 'error': $v.form.email.$error }"
+          v-model="$v.form.email.$model"
+          :class="status($v.form.email)"
+          maxlength="256"
+          name="Email-7"
+          data-name="Email 7"
+          placeholder="email@email.com"
+          id="Email-7"
+          required=""
+        />
+
+        <label for="TelTest" class="input_title">Telefone para contato*</label
+        ><input
+          :class="{ 'error': $v.form.phone.$error }"
+          v-model="$v.form.phone.$model"
+          :class="status($v.form.phone)"
+          v-mask="'(##) #####-####'"
+          type="tel"
+          class="input_field w-input"
+          maxlength="256"
+          name="Telefone-da-Escola"
+          data-name="Telefone da Escola"
+          placeholder="(00) 00000-0000"
+          id="TelTest"
+          required=""
+        />
+
+        <div class="form_role-school">
+          <label
+            for="role-select"
+            class="input_title margin-bottom margin-xsmall"
+            >Qual o seu papel na escola?</label
+          >
+
+          <label
+            data-w-id="70afa601-6f2b-187c-88f1-79602ab2535f"
+            class="form_radio-button w-radio"
+          >
+            <div
+              :class="form.paper == 'Gestor(a)' ? 'w--redirected-checked' : ''"
+              class="w-form-formradioinput w-form-formradioinput--inputType-custom form_radio w-radio-input"
+            ></div>
+            <input
+              v-model="$v.form.paper.$model"
+              type="radio"
+              id="Gestor-a"
+              name="papel-escola"
+              value="Gestor(a)"
+              data-name="papel-escola"
+              style="opacity: 0; position: absolute; z-index: -1;"
+            />
+            <span class="form_text w-form-label" for="Gestor-a">
+              Gestor(a)
+            </span>
+          </label>
+
+          <label
+            data-w-id="70afa601-6f2b-187c-88f1-79602ab25363"
+            class="form_radio-button w-radio"
+          >
+            <div
+              :class="form.paper == 'Colaborador(a)' ? 'w--redirected-checked' : ''"
+              class="w-form-formradioinput w-form-formradioinput--inputType-custom form_radio w-radio-input"
+            ></div>
+            <input
+              v-model="$v.form.paper.$model"
+              type="radio"
+              id="Colaborador-a"
+              name="papel-escola"
+              value="Colaborador(a)"
+              data-name="papel-escola"
+              style="opacity: 0; position: absolute; z-index: -1;"
+            />
+            <span class="form_text w-form-label" for="Gestor-a">
+              Colaborador(a)
+            </span>
+          </label>
+
+          <label
+            data-w-id="70afa601-6f2b-187c-88f1-79602ab25367"
+            class="form_radio-button w-radio"
+          >
+            <div
+              :class="form.paper == 'Pai ou mãe' ? 'w--redirected-checked' : ''"
+              class="w-form-formradioinput w-form-formradioinput--inputType-custom form_radio w-radio-input"
+            ></div>
+            <input
+              v-model="$v.form.paper.$model"
+              type="radio"
+              id="Pai-ou-m-e"
+              name="papel-escola"
+              value="Pai ou mãe"
+              data-name="papel-escola"
+              style="opacity: 0; position: absolute; z-index: -1;"
+            />
+            <span class="form_text w-form-label" for="Gestor-a">
+              Pai ou mãe
+            </span>
+          </label>
+
+          <label
+            data-w-id="70afa601-6f2b-187c-88f1-79602ab2536b"
+            class="form_radio-button w-radio"
+          >
+            <div
+              :class="form.paper == 'Aluno(a)' ? 'w--redirected-checked' : ''"
+              class="w-form-formradioinput w-form-formradioinput--inputType-custom form_radio w-radio-input"
+            ></div>
+            <input
+              v-model="$v.form.paper.$model"
+              type="radio"
+              id="Aluno-a"
+              name="papel-escola"
+              value="Aluno(a)"
+              data-name="papel-escola"
+              style="opacity: 0; position: absolute; z-index: -1;"
+            />
+            <span class="form_text w-form-label" for="Gestor-a">
+              Aluno(a)
+            </span>
+          </label>
+        </div>
+        <button
+          data-form="next-btn"
+          class="form-step_next-btn w-button"
+          @click.prevent="step = 1"
+          :disabled="$v.form.$invalid"
+        >
+          Quero uma demonstração
+        </button>
+      </div>
+
+      <div v-if="step == 1" data-form="step" class="form-step">
+        <div id="form-pma">
+          <label for="Escola-7" class="input_title">Nome da Escola*</label>
+          <input
+            type="text"
+            class="input_field w-input"
+            maxlength="256"
+            name="Nome-Da-Escola"
+            data-name="NomeDaEscola"
+            placeholder="Nome da Escola ou Instituição"
+            id="Nome-Da-Escola-2"
+            :class="{ 'error': $v.form2.nameSchool.$error }"
+            v-model="$v.form2.nameSchool.$model"
+            :class="status($v.form2.nameSchool)"
+          />
+
+          <label for="instituicao" class="input_title"
+            >Escola Privada ou Pública?*</label
+          >
+          <div class="form_horizontal-row">
+            <label class="form_radio-button no-margin w-radio">
+              <div
+                :class="form2.typeSchool == 'Privada' ? 'w--redirected-checked' : ''"
+                class="w-form-formradioinput w-form-formradioinput--inputType-custom form_radio w-radio-input"
+              ></div>
+              <input
+                type="radio"
+                name="Tipo-de-Escola"
+                v-model="$v.form2.typeSchool.$model"
+                value="Privada"
+                data-name="Tipo de Escola"
+                style="opacity: 0; position: absolute; z-index: -1;"
+              />
+              <span class="form_text w-form-label" style="margin-right: 15px;"
+                >Privada</span
+              >
+            </label>
+
+            <label class="form_radio-button no-margin w-radio">
+              <div
+                :class="form2.typeSchool == 'Pública' ? 'w--redirected-checked' : ''"
+                class="w-form-formradioinput w-form-formradioinput--inputType-custom form_radio w-radio-input"
+              ></div>
+              <input
+                type="radio"
+                name="Tipo-de-Escola"
+                v-model="$v.form2.typeSchool.$model"
+                :class="form2.typeSchool == 'Pública' ? 'w--redirected-checked' : ''"
+                value="Pública"
+                data-name="Tipo de Escola"
+                style="opacity: 0; position: absolute; z-index: -1;"
+              />
+              <span class="form_text w-form-label">Pública</span>
+            </label>
+          </div>
+
+          <label
+            v-if="form.paper == 'Aluno(a)' || form.paper == 'Pai ou mãe'"
+            for="Nome-Gestor-2"
+            class="input_title"
+            >Nome do(a) gestor(a) da escola*</label
+          >
+          <input
+            type="text"
+            class="input_field w-input"
+            maxlength="256"
+            name="Nome-Gestor-2"
+            v-if="form.paper == 'Aluno(a)' || form.paper == 'Pai ou mãe'"
+            data-name="Nome Gestor 2"
+            placeholder="Nome e sobrenome"
+            id="Nome-Gestor-2"
+            :class="{ 'error': $v.form2.managerSchool.$error }"
+            v-model="$v.form2.managerSchool.$model"
+            :class="status($v.form2.managerSchool)"
+          />
+
+          <label
+            for="E-mail-Gestor-2"
+            class="input_title"
+            v-if="form.paper == 'Aluno(a)' || form.paper == 'Pai ou mãe'"
+            >E-mail do(a) gestor(a) da escola*</label
+          >
+          <input
+            type="email"
+            v-if="form.paper == 'Aluno(a)' || form.paper == 'Pai ou mãe'"
+            class="input_field w-input"
+            name="E-mail-Gestor-2"
+            data-name="E Mail Gestor 2"
+            placeholder="email@email.com.br"
+            id="E-mail-Gestor-2"
+            :class="{ 'error': $v.form2.managerEmailSchool.$error }"
+            v-model="$v.form2.managerEmailSchool.$model"
+            :class="status($v.form2.managerEmailSchool)"
+          />
+
+          <label
+            v-if="form.paper == 'Aluno(a)' || form.paper == 'Pai ou mãe'"
+            for="phone-format"
+            class="input_title"
+            >Telefone do(a) gestor(a) da escola</label
+          >
+          <input
+            type="text"
+            class="input_field w-input"
+            name="Telefone"
+            v-if="form.paper == 'Aluno(a)' || form.paper == 'Pai ou mãe'"
+            data-name="Telefone"
+            placeholder="(00) 00000-0000"
+            id="phone-format"
+            :class="{ 'error': $v.form2.phoneManager.$error }"
+            v-model="$v.form2.phoneManager.$model"
+            :class="status($v.form2.phoneManager)"
+            v-mask="'(##) #####-####'"
+          />
+
+          <label for="Numero-Colaboradores-6" class="input_title"
+            >Estado*</label
+          >
+          <div class="w-embed">
+            <select
+              class="dropdown-field"
+              name="Estado PMA"
+              v-model="$v.form2.state.$model"
+              :class="status($v.form2.state)"
+            >
+              <option value="">Selecione</option>
+              <option value="AC">Acre</option>
+              <option value="AL">Alagoas</option>
+              <option value="AP">Amapá</option>
+              <option value="AM">Amazonas</option>
+              <option value="BA">Bahia</option>
+              <option value="CE">Ceará</option>
+              <option value="DF">Distrito Federal</option>
+              <option value="ES">Espírito Santo</option>
+              <option value="GO">Goiás</option>
+              <option value="MA">Maranhão</option>
+              <option value="MT">Mato Grosso</option>
+              <option value="MS">Mato Grosso do Sul</option>
+              <option value="MG">Minas Gerais</option>
+              <option value="PA">Pará</option>
+              <option value="PB">Paraíba</option>
+              <option value="PR">Paraná</option>
+              <option value="PE">Pernambuco</option>
+              <option value="PI">Piauí</option>
+              <option value="RJ">Rio de Janeiro</option>
+              <option value="RN">Rio Grande do Norte</option>
+              <option value="RS">Rio Grande do Sul</option>
+              <option value="RO">Rondônia</option>
+              <option value="RR">Roraima</option>
+              <option value="SC">Santa Catarina</option>
+              <option value="SP">São Paulo</option>
+              <option value="SE">Sergipe</option>
+              <option value="TO">Tocantins</option>
+            </select>
+          </div>
+          <label
+            v-if="form.paper == 'Gestor(a)' || form.paper == 'Colaborador(a)'"
+            for="Numero-Alunos-4"
+            class="input_title"
+            >Número de alunos*</label
+          >
+          <input
+            type="number"
+            class="input_field w-input"
+            name="Numero-Alunos-4"
+            v-if="form.paper == 'Gestor(a)' || form.paper == 'Colaborador(a)'"
+            data-name="Numero Alunos 4"
+            placeholder="000"
+            id="Numero-Alunos-4"
+            :class="{ 'error': $v.form2.number.$error }"
+            v-model="$v.form2.number.$model"
+            :class="status($v.form2.number)"
+          />
+
+          <label
+            v-if="form.paper == 'Gestor(a)' || form.paper == 'Colaborador(a)'"
+            for="Numero-Colaboradores-6"
+            class="input_title"
+            >Número de colaboradores*</label
+          >
+          <input
+            type="number"
+            class="input_field w-input"
+            name="Numero-Colaboradores-6"
+            v-if="form.paper == 'Gestor(a)' || form.paper == 'Colaborador(a)'"
+            data-name="Numero Colaboradores 6"
+            placeholder="000"
+            id="Numero-Colaboradores-6"
+            :class="{ 'error': $v.form2.numberColab.$error }"
+            v-model="$v.form2.numberColab.$model"
+            :class="status($v.form2.numberColab)"
+          />
+        </div>
+        <div class="form-step_ctas">
+          <a
+            data-form="back-btn"
+            href="#"
+            class="form-step_back-btn w-button"
+            @click.prevent="step = 0"
+          >
+          </a>
+          <button
+            type="submit"
+            value="Quero uma demonstração"
+            :disabled="$v.form2.$invalid"
+            class="form-step_send-btn w-button"
+          >
+            Enviar
+          </button>
+        </div>
+      </div>
+    </form>
+    <div v-else>
+      <div class="success-message w-form-doce">
+        <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+        <lottie-player
+          src="https://lottie.host/964af002-7419-4f39-af1f-ab2eb77606bf/2k2Ykc4j6O.json"
+          background="transparent"
+          speed="1"
+          style="width: 180px; height: 180px;"
+          autoplay
+        ></lottie-player>
+        <div class="success_text-block">
+          Ficamos felizes por seu interesse.<br />Em breve entraremos em
+          contato.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.7/dist/vuelidate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vuelidate@0.7.7/dist/validators.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/v-mask/dist/v-mask.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<link
+  rel="stylesheet"
+  href="https://uploads-ssl.webflow.com/6297a55c26ddb83c69f94ae5/css/coala-website.webflow.7727e4ef6.css"
+/>
+
+<script>
+  Vue.use(window.vuelidate.default);
+  Vue.use(VueMask.VueMaskPlugin);
+  const { required, minLength, email, requiredIf } = window.validators;
+
+  new Vue({
+    el: "#app",
+    data() {
+      return {
+        form: {
+          name: "",
+          email: "",
+          phone: "",
+          paper: ""
+        },
+        form2: {
+          nameSchool: "",
+          typeSchool: "",
+          managerSchool: "",
+          managerEmailSchool: "",
+          phoneManager: "",
+          state: "",
+          number: "",
+          numberColab: ""
+        },
+        step: 0,
+        success: false
+      };
+    },
+    validations: {
+      form: {
+        name: {
+          required,
+          minLength: minLength(5)
+        },
+        email: {
+          required,
+          email,
+          minLength: minLength(5)
+        },
+        phone: {
+          required
+        },
+        paper: {
+          required
+        }
+      },
+
+      form2: {
+        nameSchool: {
+          required
+        },
+        typeSchool: {
+          required
+        },
+        managerSchool: {
+          required: requiredIf(function (form) {
+            return (
+              this.form.paper == "Aluno(a)" || this.form.paper == "Pai ou mãe"
+            );
+          })
+        },
+        managerEmailSchool: {
+          required: requiredIf(function (form) {
+            return (
+              this.form.paper == "Aluno(a)" || this.form.paper == "Pai ou mãe"
+            );
+          }),
+          email
+        },
+        phoneManager: {
+          required: requiredIf(function (form) {
+            return (
+              this.form.paper == "Aluno(a)" || this.form.paper == "Pai ou mãe"
+            );
+          })
+        },
+        state: {
+          required
+        },
+        number: {
+          required: requiredIf(function (form) {
+            return (
+              this.form.paper == "Gestor(a)" ||
+              this.form.paper == "Colaborador(a)"
+            );
+          })
+        },
+        numberColab: {
+          required: requiredIf(function (form) {
+            return (
+              this.form.paper == "Gestor(a)" ||
+              this.form.paper == "Colaborador(a)"
+            );
+          })
+        }
+      }
+    },
+
+    form: {
+      name: "",
+      email: "",
+      phone: "",
+      paper: ""
+    },
+    form2: {
+      nameSchool: "",
+      typeSchool: "",
+      managerSchool: "",
+      managerEmailSchool: "",
+      phoneManager: "",
+      state: "",
+      number: "",
+      numberColab: ""
+    },
+
+    methods: {
+      status(validation) {
+        return {
+          error: validation.$error,
+          dirty: validation.$dirty
+        };
+      },
+      sendForm() {
+        const params = {
+          name: this.form.name || "Campo não obrigatório",
+          email: this.form.email || "Campo não obrigatório",
+          phone: this.form.phone || "Campo não obrigatório",
+          paper: this.form.paper || "Campo não obrigatório",
+          nameSchool: this.form2.nameSchool || "Campo não obrigatório",
+          typeSchool: this.form2.typeSchool || "Campo não obrigatório",
+          managerSchool: this.form2.managerSchool || "Campo não obrigatório",
+          managerEmailSchool:
+            this.form2.managerEmailSchool || "Campo não obrigatório",
+          phoneManager: this.form2.phoneManager || "Campo não obrigatório",
+          state: this.form2.state || "Campo não obrigatório",
+          number: this.form2.number || "Campo não obrigatório",
+          numberColab: this.form2.numberColab || "Campo não obrigatório"
+        };
+        axios
+          .get(
+            "https://hooks.zapier.com/hooks/catch/13165139/b0eq9c1/",
+            params,
+            { headers: { "Access-Control-Allow-Origin": "*" } }
+          )
+          .then(() => {
+            this.success = true;
+          });
+      }
+    }
+  });
+</script>
+
+<style>
+  .error {
+    border: 1px solid #f00 !important;
+  }
+  .w-button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+  }
+</style>
